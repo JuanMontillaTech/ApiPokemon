@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi pokemon list</title>
+</head>  
+<div class="pokemon-info" id="pokemonInfo">
+</div>
+
+<body>
+    <script>
+       const pokemonInfo = document.getElementById('pokemonInfo');
+
+        var urlBase = "https://pokeapi.co/api/v2/pokemon/";
+        var pokemonUrl = urlBase + "ditto";
+        //https://pokeapi.co/api/v2/pikachu"
+        //https://pokeapi.co/api/v2/pokemon/ditto
+        fetch(pokemonUrl) 
+            .then(response => response.json())
+            .then(pokemon => {
+                pokemonInfo.innerHTML = `
+                    <h3>${pokemon.name}</h3>
+                   -... 0 por que es arreglo [0] <p>types: ${pokemon.types[0].type.name}</p>
+                    <p>abilities: ${pokemon.abilities[0].ability.name}</p>
+                     
+                `;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                pokemonInfo.innerHTML = '<p>Error fetching data. Please try again later.</p>';
+            });
+    </script>
+</body>
+</html>
